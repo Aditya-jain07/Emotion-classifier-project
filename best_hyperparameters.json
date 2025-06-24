@@ -1,0 +1,17 @@
+{
+    "conv1_filters": 224,
+    "conv2_filters": 256,
+    "conv3_filters": 128,
+    "kernel_size": 7,
+    "pool_size": 2,
+    "conv_dropout": 0.2,
+    "lstm_units": 224,
+    "dense_units": 160,
+    "dropout": 0.30000000000000004,
+    "learning_rate": 0.00046957056735781046,
+    "batch_size": 16,
+    "conv_l2": 2.9066190293960355e-06,
+    "dense_l2": 2.2651597222896316e-06,
+    "output_l2": 0.001864475734774596,
+    "lstm_l2": 3.3784228553511336e-05
+}
