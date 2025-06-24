@@ -16,3 +16,217 @@
 
 - video link for visual representation of streamlit (only for IIT ROORKEE) -> https://drive.google.com/file/d/17-y_AlNXSkXOjK275aczR4ThDWoO2DOo/view?usp=drive_link
 
+
+## 📌 Project Description
+
+This project is a full pipeline for **Speech Emotion Recognition (SER)** using the **RAVDESS dataset**. It utilizes audio feature extraction (MFCCs, deltas, chroma, spectral contrast), deep learning models (CNN + Bidirectional LSTM), and hyperparameter optimization (Optuna). A Streamlit-based web app is also included for live inference.
+
+---
+
+## 🎯 Objective
+
+To classify emotions in raw audio recordings into categories such as:
+
+* Neutral
+* Calm
+* Happy
+* Sad
+* Angry
+* Fearful
+* Disgust
+* Surprised
+
+---
+
+## 🗃️ Dataset: RAVDESS
+
+* Source: Ryerson Audio-Visual Database of Emotional Speech and Song
+* Format: `.wav`
+* File naming convention encodes emotion using a code (e.g., `03` = happy)
+
+---
+
+## 🔄 Preprocessing Pipeline
+
+### 1. **Emotion Mapping**
+
+Each `.wav` file's emotion is extracted using filename parsing and mapped using:
+
+```python
+emotion_map = {
+  '01': 'neutral', '02': 'calm', '03': 'happy', '04': 'sad',
+  '05': 'angry', '06': 'fear', '07': 'disgust', '08': 'surprise'
+}
+```
+
+### 2. **Label Encoding**
+
+Emotions are encoded as integers using `LabelEncoder`. Saved for inference.
+
+### 3. **Data Splitting**
+
+* 70% training
+* 15% validation
+* 15% test
+* Stratified to preserve emotion balance
+
+### 4. **Audio Augmentation** (for training only)
+
+* Pitch shifting
+* Time stretching
+* Gaussian noise
+
+### 5. **Feature Extraction**
+
+* **MFCCs** (Mel-frequency cepstral coefficients)
+* **Deltas & Delta-deltas**
+* **Chroma STFT**
+* **Spectral Contrast**
+* All features are stacked and padded to a fixed length (95th percentile)
+
+### 6. **Standard Scaling**
+
+* `StandardScaler` fitted on training set
+* Applied to all sets (train, val, test)
+
+---
+
+## 🧠 Model Architecture
+
+### CNN-BiLSTM Hybrid:
+
+* **3 Convolutional Blocks**: Each with Conv1D, BatchNorm, MaxPooling, SpatialDropout
+* **1 BiLSTM Layer**: Bidirectional LSTM with L2 regularization
+* **Dense Layer**: Fully connected + Dropout
+* **Output Layer**: Softmax for emotion classification
+
+### Optuna for Hyperparameter Tuning
+
+* Tuning of 15+ hyperparameters: conv filters, dropout, LSTM units, learning rate, regularization, etc.
+* Objective: Maximize validation accuracy
+
+---
+
+## 🧪 Evaluation & Metrics
+
+### ✅ Best Validation Accuracy (Optuna):
+
+```
+0.8261
+```
+
+### 📊 Final Test Accuracy:
+
+```
+~81% (exact value printed at runtime)
+```
+
+### 📝 Classification Report:
+
+Includes precision, recall, F1-score for all 8 classes
+
+Emotion     Precision    Recall    F1-Score    Support
+------------------------------------------------------
+Angry         0.92        0.79       0.85         57
+Calm          0.87        0.84       0.85         55
+Disgust       0.79        0.90       0.84         29
+Fear          0.72        0.88       0.79         56
+Happy         0.78        0.63       0.70         57
+Neutral       0.80        0.71       0.75         28
+Sad           0.73        0.79       0.76         56
+Surprise      0.85        0.97       0.90         29
+------------------------------------------------------
+Accuracy                              0.80        367
+Macro Avg      0.81       0.81       0.81        367
+Weighted Avg   0.81       0.80       0.80        367
+
+
+### 📉 Loss & Accuracy Curves:
+
+Plotted over 100 epochs to monitor training
+
+### 🔀 Confusion Matrix:
+
+Visualized with Seaborn heatmap
+
+---
+
+## 🧪 Best Hyperparameters (sample)
+
+```json
+{
+  "conv1_filters": 224,
+  "conv2_filters": 256,
+  "conv3_filters": 128,
+  "kernel_size": 7,
+  "pool_size": 2,
+  "conv_dropout": 0.2,
+  "lstm_units": 224,
+  "dense_units": 160,
+  "dropout": 0.3,
+  "learning_rate": 0.00046957,
+  "batch_size": 16,
+  "conv_l2": 2.9e-06,
+  "dense_l2": 2.2e-06,
+  "output_l2": 0.00186,
+  "lstm_l2": 3.37e-05
+}
+```
+
+---
+
+## 🚀 How to Run the Project
+
+### 1. Clone Repository & Install Requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Train Model (Optional)
+
+```bash
+python train.py  # Assumes all code is in a single script or Jupyter notebook
+```
+
+### 3. Launch Streamlit App
+
+```bash
+streamlit run app.py
+```
+
+### 4. Upload `.wav` and Predict
+
+---
+
+## 📁 Output Files
+
+| File                        | Purpose                          |
+| --------------------------- | -------------------------------- |
+| `final_optuna_cnn_lstm.h5`  | Final trained model              |
+| `scaler.pkl`                | StandardScaler for inference     |
+| `label_encoder.pkl`         | LabelEncoder for class labels    |
+| `max_len.npy`               | Max length for padding sequences |
+| `best_hyperparameters.json` | Optuna best config               |
+
+---
+
+## 📦 Dependencies
+
+* `numpy`, `librosa`, `scikit-learn`, `matplotlib`, `seaborn`
+* `tensorflow`, `joblib`, `optuna`, `streamlit`
+
+---
+
+## 🙌 Acknowledgements
+
+* **RAVDESS Dataset** by Livingstone & Russo
+* **Optuna** for hyperparameter optimization
+
+---
+
+## 📌 TODO / Extensions
+
+* Add emotion-based attention layer
+* Explore transformer-based architectures
+* Deploy to HuggingFace Spaces or AWS Lambda
