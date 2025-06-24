@@ -15,7 +15,7 @@
 - best_hyperparameters               -> best parameters saved after optuna tuning (not useful in code as final model is saved)
 - 03-02-01-01-01-01-01.wav           -> test file 
 
-- video link for visual representation of streamlit (only for IIT ROORKEE) -> https://drive.google.com/file/d/17-y_AlNXSkXOjK275aczR4ThDWoO2DOo/view?usp=drive_link
+- video link for visual representation of streamlit -> https://drive.google.com/file/d/17-y_AlNXSkXOjK275aczR4ThDWoO2DOo/view?usp=drive_link
 
 - drive link for dataset used -> https://drive.google.com/drive/folders/1StU0M6Ud4yQGji4iDGAWcxerg2QK3YVp?usp=drive_link
 - raw_audio folder is the one we made from combining files from both folders , whole model is trained on raw_audio folder
