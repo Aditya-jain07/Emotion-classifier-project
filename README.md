@@ -125,31 +125,20 @@ Emotions are encoded as integers using `LabelEncoder`. Saved for inference.
 
 Includes precision, recall, F1-score for all 8 classes
 
-Emotion     Precision    Recall    F1-Score    Support
-------------------------------------------------------
-Angry         0.92        0.79       0.85         57
-Calm          0.87        0.84       0.85         55
-Disgust       0.79        0.90       0.84         29
-Fear          0.72        0.88       0.79         56
-Happy         0.78        0.63       0.70         57
-Neutral       0.80        0.71       0.75         28
-Sad           0.73        0.79       0.76         56
-Surprise      0.85        0.97       0.90         29
-------------------------------------------------------
-Accuracy                              0.80        367
-Macro Avg      0.81       0.81       0.81        367
-Weighted Avg   0.81       0.80       0.80        367
+| Emotion   | Precision | Recall | F1-Score | Support |
+|-----------|-----------|--------|----------|---------|
+| Angry     | 0.92      | 0.79   | 0.85     | 57      |
+| Calm      | 0.87      | 0.84   | 0.85     | 55      |
+| Disgust   | 0.79      | 0.90   | 0.84     | 29      |
+| Fear      | 0.72      | 0.88   | 0.79     | 56      |
+| Happy     | 0.78      | 0.63   | 0.70     | 57      |
+| Neutral   | 0.80      | 0.71   | 0.75     | 28      |
+| Sad       | 0.73      | 0.79   | 0.76     | 56      |
+| Surprise  | 0.85      | 0.97   | 0.90     | 29      |
+| **Overall Accuracy** |        |         | **0.80** | **367** |
+| **Macro Avg**        | 0.81   | 0.81    | 0.81     | 367     |
+| **Weighted Avg**     | 0.81   | 0.80    | 0.80     | 367     |
 
-
-### 📉 Loss & Accuracy Curves:
-
-Plotted over 100 epochs to monitor training
-
-### 🔀 Confusion Matrix:
-
-Visualized with Seaborn heatmap
-
----
 
 ## 🧪 Best Hyperparameters (sample)
 
@@ -177,27 +166,16 @@ Visualized with Seaborn heatmap
 
 ## 🚀 How to Run the Project
 
-### 1. Clone Repository & Install Requirements
+### 1. use file provided named "**`prediction_for_folder`**" or "**`prediction_for_file`**"
 
-```bash
-pip install -r requirements.txt
-```
+### 2. Launch Streamlit App
 
-### 2. Train Model (Optional)
-
-```bash
-python train.py  # Assumes all code is in a single script or Jupyter notebook
-```
-
-### 3. Launch Streamlit App
+* use file named "**`app.py`**" and run the below command in terminal
+* usecase video link is provided above
 
 ```bash
 streamlit run app.py
 ```
-
-### 4. Upload `.wav` and Predict
-
----
 
 ## 📁 Output Files
 
@@ -211,22 +189,3 @@ streamlit run app.py
 
 ---
 
-## 📦 Dependencies
-
-* `numpy`, `librosa`, `scikit-learn`, `matplotlib`, `seaborn`
-* `tensorflow`, `joblib`, `optuna`, `streamlit`
-
----
-
-## 🙌 Acknowledgements
-
-* **RAVDESS Dataset** by Livingstone & Russo
-* **Optuna** for hyperparameter optimization
-
----
-
-## 📌 TODO / Extensions
-
-* Add emotion-based attention layer
-* Explore transformer-based architectures
-* Deploy to HuggingFace Spaces or AWS Lambda
