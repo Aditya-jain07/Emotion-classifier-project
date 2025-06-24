@@ -9,6 +9,7 @@
 # for example , if ran on kaggle the syntax for audio_path becomes , "/kaggle/working/"audio_name"
 # suggested : run it on VS code for easy path definition
 
+# for file input , check the last function , pass file location is audio_file
 
 
 
