@@ -17,6 +17,9 @@
 
 - video link for visual representation of streamlit (only for IIT ROORKEE) -> https://drive.google.com/file/d/17-y_AlNXSkXOjK275aczR4ThDWoO2DOo/view?usp=drive_link
 
+- drive link for dataset used -> https://drive.google.com/drive/folders/1StU0M6Ud4yQGji4iDGAWcxerg2QK3YVp?usp=drive_link
+- raw_audio folder is the one we made from combining files from both folders , whole model is trained on raw_audio folder
+
 ---
 
 ## 📌 Project Description
